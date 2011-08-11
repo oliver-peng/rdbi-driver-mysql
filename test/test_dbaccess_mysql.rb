@@ -53,7 +53,7 @@ class Test_DbaccessMySQL < Test::Unit::TestCase
       "column4" => "-1",
       "column5" => "-1",
       "column6" => "-1",
-#      "column7" => "-1.11",
+      "column7" => "-1.11",
       "column8" => "-1.11",
       "column9" => "1"
     }
@@ -73,7 +73,7 @@ class Test_DbaccessMySQL < Test::Unit::TestCase
       "column4" => "1",
       "column5" => "1",
       "column6" => "1",
-#      "column7" => "1.11",
+      "column7" => "1.11",
       "column8" => "1.11",
       "column9" => "11"
     }
@@ -142,11 +142,11 @@ class Test_DbaccessMySQL < Test::Unit::TestCase
     
     @dba.execute("INSERT INTO table3 (column5, column6, column7, table2_id, column1, column2, column3, table3_id, column4) values ('2011-02-12 12:13:16', '2011', 2, 1, 'ABC', '2011-02-12', '12:13:16', 1, '2011-02-12 12:13:16')")
     
-#    result_set = @dba.execute("select * from table3 where table3_id = 1")
-#    assert_equal(1, result_set.count)
-#    data["column7"] = "DEF"
-#    data["column3"] = Time.now.strftime("%Y-%m-%d ") + data["column3"]
-#    compare_row(data, result_set.as(:Struct).fetch(:first))
+    result_set = @dba.execute("select * from table3 where table3_id = 1")
+    assert_equal(1, result_set.count)
+    data["column7"] = "DEF"
+    data["column3"] = Time.now.strftime("%Y-%m-%d ") + data["column3"]
+    compare_row(data, result_set.as(:Struct).fetch(:first))
     
     data = {
       "table3_id" => "1",
@@ -162,12 +162,12 @@ class Test_DbaccessMySQL < Test::Unit::TestCase
     
     @dba.execute("UPDATE table3 SET column5='2011-01-12 12:13:16', column6='2010', column7='ABC', table2_id=1, column1=3, column2='2010-02-12', column3='02:13:16', column4='2011-01-12 12:13:16' WHERE table3_id=1")
     
-#    result_set = @dba.execute("select * from table3 where table3_id = 1")
-#    assert_equal(1, result_set.count)
-#    data["column1"] = "HIJ"
-#    data["column3"] = Time.now.strftime("%Y-%m-%d ") + data["column3"]
-#    compare_row(data, result_set.as(:Struct).fetch(:first))
-#    
+    result_set = @dba.execute("select * from table3 where table3_id = 1")
+    assert_equal(1, result_set.count)
+    data["column1"] = "HIJ"
+    data["column3"] = Time.now.strftime("%Y-%m-%d ") + data["column3"]
+    compare_row(data, result_set.as(:Struct).fetch(:first))
+    
     
     data = {
       "table4_id" => "1",
@@ -177,31 +177,31 @@ class Test_DbaccessMySQL < Test::Unit::TestCase
       "column2" => "abc\"\'"
     }
     
-#    @dba.execute("INSERT INTO table4 (table2_id, column1, column2, table4_id, table3_id) values (1, 'ABC', 'abc\"\'', 1, 1)")
-#    
-#    result_set = @dba.execute("select * from table4 where table4_id = 1")
-#    assert_equal(1, result_set.count)
-#    compare_row(data, result_set.as(:Struct).fetch(:first))
-#    
-#    data = {
-#      "table3_id" => "1",
-#      "table2_id" => "1",
-#      "column1" => "1",
-#      "column2" => "def" 
-#    }
-#    
-#    @dba.execute("UPDATE table4 SET column2='def' WHERE table2_id=1 AND column1=1 AND table3_id=1")
-#    
-#    result_set = @dba.execute("select * from table4 where table4_id = 1")
-#    assert_equal(1, result_set.count)
-#    data["column1"] = "ABC"
-#    compare_row(data, result_set.as(:Struct).fetch(:first))
-#    
-#    data = {
-#      "table3_id" => "1",
-#      "table2_id" => "1",
-#      "column1" => "1"
-#    }
+    @dba.execute("INSERT INTO table4 (table2_id, column1, column2, table4_id, table3_id) values (1, 'ABC', 'abc\\\"\\\'', 1, 1)")
+    
+    result_set = @dba.execute("select * from table4 where table4_id = 1")
+    assert_equal(1, result_set.count)
+    compare_row(data, result_set.as(:Struct).fetch(:first))
+    
+    data = {
+      "table3_id" => "1",
+      "table2_id" => "1",
+      "column1" => "1",
+      "column2" => "def" 
+    }
+    
+    @dba.execute("UPDATE table4 SET column2='def' WHERE table2_id=1 AND column1=1 AND table3_id=1")
+    
+    result_set = @dba.execute("select * from table4 where table4_id = 1")
+    assert_equal(1, result_set.count)
+    data["column1"] = "ABC"
+    compare_row(data, result_set.as(:Struct).fetch(:first))
+    
+    data = {
+      "table3_id" => "1",
+      "table2_id" => "1",
+      "column1" => "1"
+    }
     
     @dba.execute("DELETE FROM table4  WHERE table2_id=1 AND column1=1 AND table3_id=1")
     
